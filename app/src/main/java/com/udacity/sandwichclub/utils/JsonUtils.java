@@ -69,7 +69,12 @@ public class JsonUtils {
                     continue;
                 } else if (workingPart.equals("\\")) {
                     // If something was escaped, make sure to grab it too
-                    workingPart += parts.remove(0);
+                    String next = parts.remove(0);
+                    if (next.equals("\"") || next.equals("\'")) {
+                        workingPart = next;
+                    } else {
+                        workingPart += next;
+                    }
                 }
                 workingString.append(workingPart);
             } else {
